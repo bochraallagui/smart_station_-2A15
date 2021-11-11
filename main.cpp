@@ -5,9 +5,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    Connection c;
-    bool test=c.createconnect();
+
+    Connection c; //Une seule instance de la classe connection
+    bool test=c.createconnection();
+     MainWindow w;//Etablir la connection
     if(test)
     {w.show();
         QMessageBox::information(nullptr, QObject::tr("database is open"),

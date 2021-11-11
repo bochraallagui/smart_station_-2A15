@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "ticket.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -15,8 +15,15 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pb_ajouter_clicked();
+    void on_pb_supp_clicked();
+    void on_pushButton_clicked();
+    void on_pb_modifier_clicked();
+    
 private:
     Ui::MainWindow *ui;
+    Ticket T;
 };
 
 #endif // MAINWINDOW_H
