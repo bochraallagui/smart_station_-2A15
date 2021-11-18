@@ -18,7 +18,6 @@ public:
 private slots:
     void on_pb_ajouter_clicked();
     void on_pb_supp_clicked();
-    void on_pushButton_clicked();
     void on_pb_modifier_clicked();
     
 private:

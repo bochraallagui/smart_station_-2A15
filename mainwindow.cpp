@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-    ui->le_ID->setValidator(new QIntValidator(0 , 9999999, this));
+    ui->setupUi(this); //pointe sur l'intrfc ,recuperer la valeursaisie
+    ui->le_ID->setValidator(new QIntValidator(0 , 9999999, this)); //control saisie
     ui->tab_ticket->setModel(T.afficher());
 }
 
@@ -53,9 +53,9 @@ void MainWindow::on_pb_supp_clicked()
             msgBox.exec();
 
 }
+
 void MainWindow::on_pb_modifier_clicked()
 {
-
     int id=ui->le_ID_2->text().toInt();
     int entr=ui->le_Horaire_entr_2->text().toInt();
     int arr=ui->le_Horaire_arr_2->text().toInt();
@@ -72,5 +72,5 @@ void MainWindow::on_pb_modifier_clicked()
                 msgBox.setText(("echec de modification"));
 
                 msgBox.exec();
-
+                ui->tab_ticket->setModel(T.afficher());
 }

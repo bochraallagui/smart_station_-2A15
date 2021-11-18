@@ -34,11 +34,14 @@ bool Ticket::ajouter()
     QSqlQuery query;
     QString id_string=QString::number(id);
     QString prix_string=QString::number(prix);
+    QString horaire_entr_string=QString::number(horaire_entr);
+    QString horaire_arr_string=QString::number(horaire_arr);
+    QString num_mat_string=QString::number(num_mat);
 
-    query.prepare("insert into ticket(id,horaire_entr,horaire_arr,num_mat,prix) values (:id,:horaire_entr,:horaire_arr,:num_mat,:prix)");
+    query.prepare("insert into tickets(id,horaire_entr,horaire_arr,num_mat,prix) values (:id,:horaire_entr,:horaire_arr,:num_mat,:prix)");
 
     //Création des variables liées
-    query.bindValue(0,  id_string);
+    query.bindValue(0,  id_string);  //faire la correspondance
     query.bindValue(1,  horaire_entr);
     query.bindValue(2,  horaire_arr);
     query.bindValue(3,  num_mat);
@@ -50,8 +53,11 @@ bool Ticket::ajouter()
 QSqlQueryModel * Ticket::afficher()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
-              model->setQuery("SELECT* FROM Gestion_ticket");
-              model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
+    //remplir tab
+    //QSqlQueryModel : reading from SQL
+
+              model->setQuery("SELECT* FROM tickets");
+              model->setHeaderData(0, Qt::Horizontal, QObject::tr("id")); // ajouter nom colon
               model->setHeaderData(1, Qt::Horizontal, QObject::tr("horaire_entr"));
               model->setHeaderData(2, Qt::Horizontal, QObject::tr("horaire_arr"));
               model->setHeaderData(1, Qt::Horizontal, QObject::tr("num_mat"));
@@ -62,7 +68,7 @@ QSqlQueryModel * Ticket::afficher()
 bool Ticket::supprimer(int id)
 {
     QSqlQuery query;
-              query.prepare("Delete from Gestion_ticket where id=:id");
+              query.prepare("Delete from tickets where id=:id");
 
               query.bindValue(0, id);
 
@@ -75,12 +81,15 @@ bool Ticket::modifier()
     QSqlQuery query;
     QString id_string=QString::number(id);
     QString prix_string=QString::number(prix);
-        query.prepare("UPDATE Gestion_ticket SET id=:id,horaire_entr=:horaire_entr,horaire_arr=:horaire_arr,num_mat=:num_mat,prix=:prix WHERE id=:id ");
-        query.bindValue(":id",id_string );
-        query.bindValue(":horaire_entr", horaire_entr);
-        query.bindValue(":horaire_arr", horaire_arr);
-        query.bindValue(":num_mat", num_mat);
-        query.bindValue(":prix", prix);
+    QString horaire_entr_string=QString::number(horaire_entr);
+    QString horaire_arr_string=QString::number(horaire_arr);
+    QString num_mat_string=QString::number(num_mat);
+        query.prepare("UPDATE tickets SET id=:id,horaire_entr=:horaire_entr,horaire_arr=:horaire_arr,num_mat=:num_mat,prix=:prix WHERE id=:id ");
+        query.bindValue(":id",id_string); //liasion valeur/parametre
+        query.bindValue(":horaire_entr", horaire_entr_string);
+        query.bindValue(":horaire_arr", horaire_arr_string);
+        query.bindValue(":num_mat", num_mat_string);
+        query.bindValue(":prix", prix_string);
         query.exec();
 
 }
