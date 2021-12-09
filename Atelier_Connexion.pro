@@ -4,9 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT +=core gui sql printsupport multimedia
+QT +=widgets multimedia
+QT  += core gui svg
+greaterThan(QT_MAJOR_VERSION,4):QT += widgets printsupport
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
@@ -28,11 +29,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
+    qcustomplot.cpp \
+    qrcode.cpp \
     ticket.cpp
 
 HEADERS += \
+    QRcode.hhp \
         mainwindow.h \
     connection.h \
+    qcustomplot.h \
     ticket.h
 
 FORMS += \
@@ -42,3 +47,4 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+

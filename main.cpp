@@ -2,10 +2,11 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "connection.h"
+
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
 
+    QApplication a(argc, argv);
     Connection c; //Une seule instance de la classe connection
     bool test=c.createconnection();
      MainWindow w;//Etablir la connection
@@ -20,8 +21,6 @@ int main(int argc, char *argv[])
         QMessageBox::critical(nullptr, QObject::tr("database is not open"),
                     QObject::tr("connection failed.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
-
-
 
     return a.exec();
 }
